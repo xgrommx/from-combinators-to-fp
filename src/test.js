@@ -1,7 +1,9 @@
-import {of, map, filter, flatMap, ap, lift, converge, juxt, reduce, compose} from ".";
+import {of, map, filter, flatMap, ap, lift, converge, juxt, reduce, compose, concat, fold, foldMap} from ".";
 
 // wrapper
 console.log(of(42), 'of');
+// concat
+console.log(concat([1,2,3])([4]), 'concat');
 // map
 console.log(map(x => x * 10)([1, 2, 3]), 'map');
 // filter
@@ -20,3 +22,10 @@ console.log(juxt([Math.max, Math.min])(1, 2, 3, 4, 5), 'juxt');
 console.log(reduce(acc => next => acc + next)(0)([1,2,3,4,5]), 'reduce');
 // compose
 console.log(compose(x => x * 10, x => x + 2, (x, y) => x + y)(10, 20), 'compose');
+// fold
+console.log(fold([[1], [2], [3], [4]]), 'fold');
+// foldMap
+console.log(foldMap(x => x * 10)([[1], [2], [3], [4]]), 'foldMap');
+
+// Laws
+console.log(map(x => x * 10)([1,2,3]), ap(of(x => x * 10))([1,2,3]));
